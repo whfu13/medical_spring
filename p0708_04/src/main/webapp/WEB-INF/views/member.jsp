@@ -15,6 +15,8 @@
 		    <input type="password" name="pw"><br>
 		    <label>이름</label>
 		    <input type="text" name="name"><br>
+		    <label>전화번호</label>
+		    <input type="text" name="phone"><br>
 		    <label>성별</label><br>
 		    <input type="radio" name="gender" value="male" id="male">
 		    <label for="male">남자</label>
@@ -33,8 +35,6 @@
 		    <input type="checkbox" name="hobby" value="book" id="book">
 		    <label for="book">독서</label>
 		    <br>
-		    
-		    
 		    <input type="submit" value="전송">
 		</form>
 </body>
