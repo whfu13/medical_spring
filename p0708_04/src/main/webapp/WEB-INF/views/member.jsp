@@ -17,13 +17,13 @@
 		    <input type="text" name="name"><br>
 		    <label>전화번호</label>
 		    <input type="text" name="phone"><br>
-		    <label>성별</label><br>
-		    <input type="radio" name="gender" value="male" id="male">
+		    <label>성별</label>
+		    <input type="radio" name="gender" value="male" id="male"><br>
 		    <label for="male">남자</label>
 		    <input type="radio" name="gender" value="female" id="female">
 		    <label for="female">여자</label>
 		    <br>
-		    <label>취미</label><br>
+		    <label>취미</label>
 		    <input type="checkbox" name="hobby" value="game" id="game">
 		    <label for="game">게임</label>
 		    <input type="checkbox" name="hobby" value="golf" id="golf">
