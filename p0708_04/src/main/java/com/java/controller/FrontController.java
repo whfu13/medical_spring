@@ -76,6 +76,6 @@ public class FrontController {
 		mv.addObject("hobby",Arrays.toString(hobby));
 		mv.setViewName("doMember"); // 파일이름
 		
-		return memUpdate;
+		return mv;
 	}
 }

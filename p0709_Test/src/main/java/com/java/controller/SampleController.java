@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.java.dto.Sample;
+import com.java.dto.SampleDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -15,7 +15,7 @@ public class SampleController {
 		return "sample/info";
 	}
 	@RequestMapping("/sample/doInfo")
-	public ModelAndView doInfo(Sample sp) {
+	public ModelAndView doInfo(SampleDto sp) {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("sp",sp);
