@@ -25,11 +25,11 @@
          </tr>
          <tr>
            <td>아이디</td>
-           <td>${mdto.id}</td>
+           <td>${memberDto.id}</td>
          </tr>
          <tr>
            <td>패스워드</td>
-           <td>${mdto.pw}</td>
+           <td>${memberDto.pw}</td>
          </tr>
        
        </table>

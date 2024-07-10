@@ -7,8 +7,6 @@ import com.java.dto.MemberDto;
 @Mapper
 public interface MemberMapper {
 
-	static MemberDto selectLogin(MemberDto mdto) {
-		return null;
-	}
+	MemberDto selectLogin(MemberDto mdto);
 
 }
