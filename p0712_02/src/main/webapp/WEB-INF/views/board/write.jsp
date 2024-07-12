@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
     <h1>관리자 글쓰기</h1>
     <hr>
 
-    <form action="/board/write_view" name="write" method="post" enctype="multipart/form-data">
+    <form action="/board/write" name="write" method="post" enctype="multipart/form-data">
       <table>
         <colgroup>
           <col width="15%">

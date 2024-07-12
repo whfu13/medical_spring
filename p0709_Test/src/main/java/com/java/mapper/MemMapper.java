@@ -7,6 +7,8 @@ import com.java.dto.MemDto;
 @Mapper
 public interface MemMapper {
 	
-	MemDto seleccLogin(MemDto mdto);
+
+	MemDto selectLogin(MemDto mdto);
+
 
 }

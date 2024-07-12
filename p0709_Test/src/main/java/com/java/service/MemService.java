@@ -4,5 +4,6 @@ import com.java.dto.MemDto;
 
 public interface MemService {
 	
-	MemDto selectLogin(MemDto mdto);
+	MemDto selectLogin(MemDto mDto);
+	
 }

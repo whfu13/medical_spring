@@ -49,16 +49,14 @@
       </tr>
       <!-- 내용부분 -->
       <c:forEach items="${list}" var="bdto">
-      <tr>
-        <td><span class="table-notice">${bdto.bno}</span></td>
-        <td class="table-title">
-        <a href="/board/view?bno=${bdto.bno}">
-        <c:forEach var="i" begin="1" end="${bdto.bindent}" step="1">☞</c:forEach>
-        ${bdto.btitle}</a>
-        </td>
-        <td>${bdto.id}</td>
-        <td>${bdto.bhit}</td>
-      </tr>
+	      <tr>
+	        <td><span class="table-notice">${bdto.bno}</span></td>
+	        <td class="table-title">
+	        <a href="">${bdto.btitle}</a>
+	        </td>
+	        <td>${bdto.bdate}</td>
+	        <td>${bdto.bhit}</td>
+	      </tr>
       </c:forEach>
       
     </table>
@@ -71,7 +69,7 @@
       <li class="last"></li>
     </ul>
 
-    <a href="/board/write"><div class="write">쓰기</div></a>
+    <a href="write_view.jsp"><div class="write">쓰기</div></a>
   </section>
 
 </body>

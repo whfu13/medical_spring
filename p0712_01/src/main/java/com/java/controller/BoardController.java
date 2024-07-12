@@ -3,6 +3,7 @@ package com.java.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,39 +11,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.java.dto.BoardDto;
 import com.java.service.BoardService;
 
-@Controller
+@Controller		// IOC 컨테이너 등록
 public class BoardController {
 	
 	@Autowired
+	@Qualifier(value="ver1")
 	BoardService boardService;
 	
-	@RequestMapping("/board/list") // 게시판 페이지
+	@RequestMapping("/board/list")
 	public ModelAndView list() {
 		
-		ArrayList<BoardDto> list = boardService.selectList();
+		// 게시판 전체 가져오기
+		ArrayList<BoardDto> list =  boardService.selectList();
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list",list);
 		mv.setViewName("board/list");
 		return mv;
-	
-	}// list
-	
-	@RequestMapping("/board/view") // 뷰페이지
-	public ModelAndView view(BoardDto bdto) {
-		
-		BoardDto boardDto = boardService.selectOne(bdto);
-		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("boardDto",boardDto);
-		mv.setViewName("board/view");
-		
-		return mv;
-		
-	}// view
-	
-	@RequestMapping("/board/write") // 글쓰기화면
-	public String write() {
-		return("board/write");
-	} // write
-	
+	}
 }
