@@ -11,8 +11,8 @@
   <title>뷰페이지</title>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/read.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/read.css">
 </head>
 <body>
 <section>
@@ -29,25 +29,54 @@
         <th colspan="3">제목</th>
       </tr>
       <tr>
-        <td colspan="3"><strong>게시판 글제목이 들어갑니다.</strong></td>
+        <td colspan="3"><strong>${map.boardDto.btitle}</strong></td>
       </tr>
       <tr>
-        <td>작성자가 들어갑니다.</td>
+        <td>${map.boardDto.id}</td>
         <td>조회수</td>
-        <td>111</td>
+        <td>${map.boardDto.bhit}</td>
       </tr>
       <tr>
-        <td colspan="3" class="article">글 내용이 들어갑니다.</td>
+        <td colspan="3" class="article">${map.boardDto.bcontent}</td>
+      </tr>
+     <tr>
+        <td colspan="3"><strong>파일첨부</strong></td>
       </tr>
       <tr>
-        <td colspan="3"><strong>다음글</strong> <span class="separator">|</span> [키즈잼] 2월 프로그램 안내</td>
+        <c:if test="${map.boardDto.bfile != null}">
+        	<td colspan="3" class="article">
+        	  <img style="width:50%;" src="/upload/${map.boardDto.bfile }">
+        	</td>
+        </c:if>
+        <c:if test="${map.boardDto.bfile == null}">
+        	<td colspan="3" class="article">첨부파일 없음</td>
+        </c:if>
+      </tr>
+      
+      <tr>
+        <td colspan="3"><strong>다음글</strong> <span class="separator">|</span>
+        <c:if test="${map.prevDto.bno != null }">
+        <a href="/board/view?bno=${map.prevDto.bno}&page=${page}"> [게시글] ${map.prevDto.btitle }</a>
+      	</c:if>
+      	  <c:if test="${map.prevDto.bno == null}">
+      	  다음글이 없습니다.
+      	</c:if>
+      	</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>이전글</strong> <span class="separator">|</span> [키즈잼] 2020년 1분기 정기 휴관일 안내</td>
+        <td colspan="3"><strong>이전글</strong><span class="separator">|</span>
+       <c:if test="${map.prevDto.bno != null }">
+       <a href="/board/view?bno=${map.nextDto.bno}&page=${page}"> [게시글] ${map.nextDto.btitle }</a>
+     </c:if>
+       <c:if test="${map.nextDto.bno == null}">
+      	  이전글이 없습니다.
+      	</c:if>
+      	</td>
       </tr>
     </table>
 
-    <a href=""><div class="list">목록</div></a>
+
+    <a href="/board/list?page=${page}&category=${category}&searchWord=${searchWord}"><div class="list">목록</div></a>
     <a href=""><div class="list">삭제</div></a>
     <a href=""><div class="list">수정</div></a>
     <a href=""><div class="list">답변달기</div></a>

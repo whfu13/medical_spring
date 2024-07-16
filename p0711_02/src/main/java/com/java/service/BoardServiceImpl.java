@@ -16,10 +16,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public ArrayList<BoardDto> selectList() {
-		
 		// mybatis 연결해서 list 가져오기
 		ArrayList<BoardDto> list = boardDao.selectList();
-		
 		return list;
 	} // selectList
 
@@ -28,6 +26,6 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.updateBhit(bdto);
 		BoardDto boardDto = boardDao.selectOne(bdto);
 		return boardDto;
-	}
+	}// selectOne
 
 }

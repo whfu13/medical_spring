@@ -20,6 +20,7 @@ public interface BoardDao {
 	BoardDto selectOne(BoardDto bdto);
 	BoardDto selectOnePrev(BoardDto bdto);
 	BoardDto selectOneNext(BoardDto bdto);
+	
 	// 조회수1증가
 	void updateBhit(BoardDto bdto);
 
