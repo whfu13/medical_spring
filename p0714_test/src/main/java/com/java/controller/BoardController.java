@@ -49,7 +49,7 @@ public class BoardController {
 	@RequestMapping("/board/write") // 글쓰기화면
 	public String write() {
 		return "board/write";
-	} // write
+	} // write1
 	
 	@PostMapping("/board/write") //글쓰기 저장
 	public String write(BoardDto bdto,@RequestPart MultipartFile files) {
@@ -80,6 +80,14 @@ public class BoardController {
 		
 		boardService.insertBoard(bdto);
 		return "redirect:/board/list";
+	}// write2
+	
+	@RequestMapping("/board/delete") // 게시글 삭제
+	public String delete(BoardDto bdto) {
+		boardService.deleteBoard(bdto);
+		return "redirect:/board/list";
 	}
+	
+	
 	
 }

@@ -74,6 +74,11 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.insertBoard(bdto);
 		
 	}
+
+	@Override // 게시글 삭제
+	public void deleteBoard(BoardDto bdto) {
+		boardDao.deleteBoard(bdto);
+	}
 	
 
 }

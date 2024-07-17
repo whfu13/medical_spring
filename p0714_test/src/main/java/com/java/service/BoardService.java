@@ -15,6 +15,9 @@ public interface BoardService {
 
 	// 게시글 저장
 	void insertBoard(BoardDto bdto);
+	
+	// 게시글 삭제
+	void deleteBoard(BoardDto bdto);
 
 
 }

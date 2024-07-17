@@ -60,4 +60,15 @@ public class NoticeServiceImpl implements NoticeService {
 		return;
 	}
 
+	@Override	// 하단 댓글 수정
+	public CommentBDto updateCommentB(CommentBDto commentBDto) {
+		System.out.println("service cno : "+commentBDto.getCno());
+		// 하단 댓글 수정
+		noticeDao.updateCommentB(commentBDto);
+		// 하단 댓글 1개 가져오기
+		CommentBDto cBDto = noticeDao.selectOneCommentB(commentBDto);
+		
+		return cBDto;
+	}
+
 }

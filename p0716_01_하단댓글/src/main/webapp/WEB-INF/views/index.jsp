@@ -116,10 +116,14 @@ $(document).ready(function() {
 			</div>
 			<div id="snb">
 				<ul>
-					<li><a href="#">LOGIN</a></li>
-					<li><a href="#">JOIN</a></li>
-					<li><a href="#">MY PAGE</a></li>
-					<li><a href="#">CART</a></li>
+					<c:if test="${sessionId == null }">
+						<li><a href="/member/login">LOGIN</a></li>
+						<li><a href="#">JOIN</a></li>
+					</c:if>
+					<c:if test="${sessionId != null }">
+						<li><a href="/member/logout">LOGOUT</a></li>
+					<li><a href="#">회원정보</a></li>
+					</c:if>
 				</ul>
 
 				<div id="search">

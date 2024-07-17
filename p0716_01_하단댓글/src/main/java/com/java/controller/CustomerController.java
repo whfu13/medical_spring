@@ -50,6 +50,16 @@ public class CustomerController {
 		
 		return cBDto;
 	}
+	@RequestMapping("/customer/commentBUpdate")	// 하단 댓글 수정
+	@ResponseBody // 데이터 리턴
+	public CommentBDto commentBUpdate(CommentBDto commentBDto) {
+		System.out.println("controller cno : "+commentBDto.getCno());
+		System.out.println("controller ccontent : "+commentBDto.getCcontent());
+		
+		//bno,id,cpw,ccontent
+		CommentBDto cBDto = noticeService.updateCommentB(commentBDto);
+		return cBDto;
+	}
 	@RequestMapping("/customer/commentBDelete")	// 하단 댓글 삭제
 	@ResponseBody // 데이터 리턴
 	public String commentBDelete(CommentBDto commentBDto) {
