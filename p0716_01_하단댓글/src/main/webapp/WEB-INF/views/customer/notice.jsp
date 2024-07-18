@@ -213,7 +213,7 @@ $(document).ready(function() {
 			<!-- contents -->
 			<div id="contents">
 				<div id="customer">
-					<h2><strong>NOTICE</strong><span>쟈뎅샵 소식을 전해드립니다.</span></h2>
+					<h2><strong>자뎅샵</strong><span>쟈뎅샵 소식을 전해드립니다.</span></h2>
 					
 					<div class="orderDivMt">
 						<table summary="NO, 제목, 등록일, 조회수 순으로 공지사항을 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
@@ -240,7 +240,7 @@ $(document).ready(function() {
 										<img src="../images/ico/ico_new.gif" alt="NEW" />
 									</td>
 									<td>${nDto.bdate }</td>
-									<td class="tnone right">"{nDto.bhit}</td>
+									<td class="tnone right">{nDto.bhit}</td>
 								</tr>
 								</c:forEach>
 
