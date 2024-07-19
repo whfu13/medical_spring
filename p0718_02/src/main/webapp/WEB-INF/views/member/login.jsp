@@ -214,7 +214,7 @@ $(document).ready(function() {
 		<!-- 로그인 -->
 		<script>
 			$(function(){
-				$(".sBtn").clcik(function(){
+				$(".sbtn").click(function(){
 					alert("로그인 진행");
 					if($("#id").val()==""){
 						alert("아이디를 입력하셔야합니다.");
@@ -229,7 +229,7 @@ $(document).ready(function() {
 					}
 					
 					// MController전송
-					loginFrm.submit();
+					loginFrm.submit();	
 				});
 			});
 		</script>
