@@ -47,18 +47,18 @@
     <table>
       <colgroup>
         <col width="18%">
-        <col width="50%">
-        <col width="18%">
+        <col width="37%">
+        <col width="15%">
+        <col width="20%">
         <col width="10%">
       </colgroup>
-      <tr>
-      	<td colspan="4">총 개수: ${map.countAll}개</td>
-      </tr>
+    
       <!-- 제목부분 -->
       <tr>
-        <th>No.</th>
+        <th>번호</th>
         <th>제목</th>
-        <th>작성일</th>
+        <th>글쓴이</th>
+        <th>등록일</th>
         <th>조회수</th>
       </tr>
       <!-- 내용부분 시작 -->
@@ -72,6 +72,7 @@
 	        </a>
 	        </td>
 	        <td>${bdto.id }</td>
+	        <td>${bdto.bdate }</td>
 	        <td>${bdto.bhit }</td>
 	      </tr>
       </c:forEach>

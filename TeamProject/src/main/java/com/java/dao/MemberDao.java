@@ -6,7 +6,8 @@ import com.java.dto.MemberDto;
 
 @Mapper
 public interface MemberDao {
-	//로그인 확인
+
+	// 로그인 확인
 	MemberDto selectSignIn(MemberDto memberDto);
 
 }
