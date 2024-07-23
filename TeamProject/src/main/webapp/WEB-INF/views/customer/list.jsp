@@ -11,14 +11,11 @@
   <title>게시판</title>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean" rel="stylesheet">
-  <link rel="stylesheet" href="/css/board_list.css">
-  <link rel="stylesheet" href="/css/board_read.css">
-  <link rel="stylesheet" href="/css/board_read2.css">
-  <link rel="stylesheet" href="/css/board_style.css">
-  <link rel="stylesheet" href="/css/board_write.css">
+  <link rel="stylesheet" href="/css/customer_list.css">
+  <link rel="stylesheet" href="/css/customer_style.css">
    <script>
   	function sBtn(){
-  		if($("#searchWord").val().length<1){
+  		if($("#sWord").val().length<1){
 	  		alert("검색어를 입력하세요.");
 	  		return false;
   		}
@@ -31,7 +28,7 @@
 <section>
     <h1>질문 게시판</h1>
     <div id="wrapper">
-      <form action="/board/list" name="search" method="post">
+      <form action="/customer/list" name="search" method="post">
         <select name="category" id="category">
           <option value="all">전체</option>
           <option value="btitle">제목</option>
@@ -39,7 +36,7 @@
         </select>
 
         <div class="title">
-          <input type="text" size="16" name="searchWord" id="searchWord">
+          <input type="text" size="16" name="sWord" id="sWord" placeholder="검색어를 입력해주세요">
         </div>
   
         <button type="button" onclick="sBtn()"><i class="fas fa-search"></i></button>
@@ -121,7 +118,7 @@
       </c:if>
     </ul>
 
-    <a href="/board/write"><div class="write">쓰기</div></a>
+    <a href="/customer/write"><div class="write">글쓰기</div></a>
   </section>
 
 </body>

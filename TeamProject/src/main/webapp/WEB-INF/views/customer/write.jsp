@@ -10,15 +10,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>글쓰기</title>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/write.css">
+  <link rel="stylesheet" href="/css/customer_style.css">
+  <link rel="stylesheet" href="/css/customer_write.css">
 </head>
 <body>
 <section>
     <h1>관리자 글쓰기</h1>
     <hr>
 
-    <form action="/board/write" name="write" method="post" enctype="multipart/form-data">
+    <form action="/customer/write" name="write" method="post" enctype="multipart/form-data">
       <table>
         <colgroup>
           <col width="15%">
@@ -52,7 +52,7 @@
       <hr>
       <div class="button-wrapper">
         <button type="submit" class="write">작성완료</button>
-        <button type="button" class="cancel" onclick="javascript:location.href='/board/list'">취소</button>
+        <button type="button" class="cancel" onclick="javascript:location.href='/customer/list'">취소</button>
       </div>
     </form>
 
