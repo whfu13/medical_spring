@@ -12,7 +12,7 @@
 			<li><a href="member/login">로그인></a></li>
 			<li><a href="form">회원가입</a></li>
 			<li><a href="/logout">로그아웃</a></li>
-			<li><a href="boardList?bno=10">게시판</a></li>
+			<li><a href="/index">게시판</a></li>
 			<li><a href="boardList2/5">게시판2</a></li>
 			<li>회원정보</li>
 		</ul>
