@@ -49,6 +49,22 @@ public class BoardServiceImpl implements BoardService {
 		map.put("searchWord",searchWord);
 		
 		return map; // 리턴해야 할 데이터 개수가 2개 이상일때 => map 사용
+		
 	} // selectList
+
+	@Override
+	public Map<String, Object> selectOne(BoardDto bdto) {
+		boardDao.updateBhit(bdto); // 조회수 1증가
+		BoardDto boardDto = boardDao.selectOne(bdto);
+		BoardDto prevDto = boardDao.selectOnePrev(bdto);
+		BoardDto nextDto = boardDao.selectOneNext(bdto);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardDto", boardDto);
+		map.put("prevDto", prevDto);
+		map.put("nextDto", nextDto);
+		return map;
+		
+	} // selectOne
 
 }

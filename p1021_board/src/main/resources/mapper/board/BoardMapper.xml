@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.BoardDao">
+   <!-- 게시판 리스트 -->
+	<select id="selectList" resultType="com.java.dto.BoardDto">
+	  select * from
+	  (select row_number()over(order by post_group desc, post_step asc) rnum, a.* from post a
+	    <if test="category == 'post_title' or category == 'post_content' ">
+	      where ${category} like '%'||#{searchWord}||'%'
+	    </if>
+	    <if test="category == 'id' or category == 'post_content' ">
+	      where ${category} like '%'||#{searchWord}||'%'
+	    </if>
+	    <if test="category == 'all' ">
+	      where post_title like '%'||#{searchWord}||'%' or post_content like '%'||#{searchWord}||'%'
+	    </if>
+	  )
+	  where rnum between #{startRow} and #{endRow}
+	</select>
+  
+  <!-- 게시글 총 개수-->
+  <select id="selectCount" resultType="int">
+   	 select count(*) from post
+    <if test="category == 'post_title' or category == 'post_content' ">
+    	where ${category} like '%'||#{searchWord}||'%'
+    </if>
+ 	<if test="category == 'id' or category == 'post_content' ">
+    	where ${category} like '%'||#{searchWord}||'%'
+    </if>
+    <if test="category == 'all' ">
+    	where post_title like '%'||#{searchWord}||'%' or post_content like '%'||#{searchWord}||'%'
+    </if>
+  </select>
+  <!-- 게시글 1개 가져오기 : 현재글 -->
+  <select id="selectOne" resultType="com.java.dto.BoardDto">
+    select * from post where post_no=#{post_no}
+  </select>
+  <!-- 게시글 이전글 -->
+  <select id="selectOnePrev" resultType="com.java.dto.BoardDto">
+    select * from
+	(select row_number()over(order by post_group desc, post_step asc) rnum, a.* from post a)
+	where rnum=(
+	select rnum from
+	(select row_number()over(order by post_group desc, post_step asc) rnum, a.* from post a)
+	where post_no=#{post_no}
+	)-1
+  </select>
+  <!-- 게시글 다음글 -->
+  <select id="selectOneNext" resultType="com.java.dto.BoardDto">
+    select * from
+	(select row_number()over(order by post_group desc, post_step asc) rnum, a.* from post a)
+	where rnum=(
+	select rnum from
+	(select row_number()over(order by post_group desc, post_step asc) rnum, a.* from post a)
+	where post_no=#{post_no}
+	)+1
+  </select>
+  
+  </mapper>

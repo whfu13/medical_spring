@@ -15,4 +15,12 @@ public interface BoardDao {
 	// 게시글 총 개수 - 리스트,검색 포함
 	int selectCount(String category, String searchWord);
 
+	// 조회수 1증가
+	void updateBhit(BoardDto bdto);
+
+	// 게시글 1개 가져오기 - 현재글,이전글,다음글
+	BoardDto selectOne(BoardDto bdto);
+	BoardDto selectOnePrev(BoardDto bdto);
+	BoardDto selectOneNext(BoardDto bdto);
+
 }

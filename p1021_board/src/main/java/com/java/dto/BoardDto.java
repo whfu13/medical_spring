@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BoardDto {
 
-	private int bno;
+	private int post_no;
 	private String id;
-	private String btitle;
-	private String bcontent;
-	private Timestamp bdate;
-	private int bgroup;
-	private int bstep;
-	private int bindent;
-	private int bhit;
-	private String bfile;
+	private String post_title;
+	private String post_content;
+	private int post_group;
+	private int post_step;
+	private int post_indent;
+	private int post_hit;
+	private Timestamp post_reg_date;
+	private String post_file;
 }
