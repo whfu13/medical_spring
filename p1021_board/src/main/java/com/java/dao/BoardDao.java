@@ -23,4 +23,13 @@ public interface BoardDao {
 	BoardDto selectOnePrev(BoardDto bdto);
 	BoardDto selectOneNext(BoardDto bdto);
 
+	// 게시글 저장
+	void insertPost(BoardDto bdto);
+
+	// 게시글 삭제
+	void deletePost(BoardDto bdto);
+
+	// 게시글 수정
+	void updatePost(BoardDto bdto);
+
 }

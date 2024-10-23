@@ -12,4 +12,16 @@ public interface BoardService {
 	// 게시글 1개 가져오기
 	Map<String, Object> selectOne(BoardDto bdto);
 
+	// 게시글 저장
+	void insertPost(BoardDto bdto);
+
+	// 게시글 삭제
+	void deletePost(BoardDto bdto);
+
+	// 게시글 수정
+	BoardDto updatePost(BoardDto bdto);
+
+	// 게시글 수정 저장
+	void doUpdatePost(BoardDto bdto);
+
 }

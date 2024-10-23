@@ -314,13 +314,26 @@
         </c:if>
     </ul>
 </div>
-	<!-- 로그인한 회원은 글쓰기창으로 이동 -->
+	<%-- <!-- 로그인한 회원은 글쓰기창으로 이동 -->
 	<c:if test="${sessionId != null}">
 	    <script>
 	        function writeBtn(){
 	            location.href="/board/write"; 
 	        }
 	    </script>
+	</c:if> --%>
+	
+	<!-- 비회원일 경우 회원가입 페이지로 이동 -->
+	<c:if test="${sessionId == null}">
+	    <script>
+	        function writeBtn(){
+        	  if (confirm("로그인 후 글쓰기가 가능합니다. 로그인 하시겠습니까?")) {
+                    location.href = "/member/signup1";
+                } else {
+                    location.href = "/customer/customer2_list";
+                }
+	        }
+  	  </script>
 	</c:if>
 	
   </section>

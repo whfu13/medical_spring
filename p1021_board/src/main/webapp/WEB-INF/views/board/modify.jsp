@@ -18,9 +18,10 @@
     <h1>게시글수정</h1>
     <hr>
 
-    <form action="modify.do" name="modify" method="post">
+    <form action="board/doUpdate" name="modify" method="post" enctype="multipart/form-data">
       <table>
-      <input type="hidden" name="bId" value="">
+      <input type="hidden" name="post_no" value="${boardDto.post_no}">
+      <input type="hidden" name="post_file" value="${boardDto.post_file}">
         <colgroup>
           <col width="15%">
           <col width="85%">
@@ -28,34 +29,41 @@
         <tr>
           <th>작성자</th>
           <td>
-            <input type="text" name="bName" value="" readonly>
+            <input type="text" name="id" value="${boardDto.id}" readonly>
           </td>
         </tr>
         <tr>
           <th>제목</th>
           <td>
-            <input type="text" name="bTitle" value="">
+            <input type="text" name="post_title" value="${boardDto.post_title}">
           </td>
         </tr>
         <tr>
           <th>내용</th>
           <td>
-            <textarea name="bContent" cols="50" rows="10">
-           
-            </textarea>
+            <textarea name="post_content" cols="50" rows="10">${boardDto.post_content}</textarea>
           </td>
         </tr>
         <tr>
           <th>이미지 표시</th>
           <td>
-            <input type="file" name="file" id="file">
+            <input type="file" name="files" id="file">
           </td>
+        </tr>
+        <tr>
+        	<th>파일이름</th>
+        	<c:if test="${boardDto.post_file != null}">
+        		<td>${boardDto.post_file}</td>
+       		</c:if>
+        	<c:if test="${boardDto.post_file = null}">
+        		<td>첨부파일없음</td>
+       		</c:if>
         </tr>
       </table>
       <hr>
       <div class="button-wrapper">
         <button type="submit" class="write">수정완료</button>
-        <button type="button" class="cancel" onclick="javascript:location.href='list.do'">취소</button>
+        <button type="button" class="cancel" onclick="javascript:location.href='/board/view?post_no=${boardDto.post_no}'">취소</button>
       </div>
     </form>
 

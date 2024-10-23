@@ -52,7 +52,7 @@ public class BoardServiceImpl implements BoardService {
 		
 	} // selectList
 
-	@Override
+	@Override	// 게시글 가져오기
 	public Map<String, Object> selectOne(BoardDto bdto) {
 		boardDao.updateBhit(bdto); // 조회수 1증가
 		BoardDto boardDto = boardDao.selectOne(bdto);
@@ -66,5 +66,30 @@ public class BoardServiceImpl implements BoardService {
 		return map;
 		
 	} // selectOne
+
+	@Override	// 게시글 저장
+	public void insertPost(BoardDto bdto) {
+		boardDao.insertPost(bdto);
+		
+	} // insertPost
+
+	@Override	// 게시글 삭제
+	public void deletePost(BoardDto bdto) {
+		boardDao.deletePost(bdto);
+		
+	} // deletePost
+
+	@Override	// 게시글 수정
+	public BoardDto updatePost(BoardDto bdto) {
+		BoardDto boardDto = boardDao.selectOne(bdto);
+		return boardDto;
+		
+	} // updatePost
+
+	@Override	// 게시글 수정 저장
+	public void doUpdatePost(BoardDto bdto) {
+		boardDao.updatePost(bdto);
+		
+	} // doUpdatePost
 
 }
