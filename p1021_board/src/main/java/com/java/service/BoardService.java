@@ -1,5 +1,6 @@
 package com.java.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.java.dto.BoardDto;
@@ -23,5 +24,8 @@ public interface BoardService {
 
 	// 게시글 수정 저장
 	void doUpdatePost(BoardDto bdto);
+
+	// 공지사항 가져오기
+	List<BoardDto> selectNoticeList();
 
 }

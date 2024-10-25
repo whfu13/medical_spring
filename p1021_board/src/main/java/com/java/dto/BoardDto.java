@@ -22,4 +22,5 @@ public class BoardDto {
 	private int post_hit;
 	private Timestamp post_reg_date;
 	private String post_file;
+	private Boolean is_notice;
 }

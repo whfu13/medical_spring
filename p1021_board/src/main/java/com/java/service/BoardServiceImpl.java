@@ -2,6 +2,7 @@ package com.java.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,11 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.updatePost(bdto);
 		
 	} // doUpdatePost
+
+	@Override	// 공지사항 가져오기
+	public List<BoardDto> selectNoticeList() {
+		return boardDao.selectNoticeList();
+	
+	} // selectNoticeList
 
 }

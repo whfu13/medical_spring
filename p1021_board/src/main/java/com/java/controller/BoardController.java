@@ -1,6 +1,7 @@
 package com.java.controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,14 @@ public class BoardController {
 	public ModelAndView list(@RequestParam(defaultValue = "1")int page,
 			String category, String searchWord) {
 		
-		// 리스트, 검색 포함
+		// 일반 게시글 리스트
 		Map<String, Object> map = boardService.selectList(page,category,searchWord);
+		
+		// 공지사항 리스트
+        List<BoardDto> noticeList = boardService.selectNoticeList();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("map",map);
+		mv.addObject("noticeList",noticeList);
 		mv.setViewName("board/list");
 		return mv;
 		
@@ -47,8 +52,10 @@ public class BoardController {
 	} // view
 	
 	@RequestMapping("/board/write") // 글쓰기 화면
-	public String write() {
-		return "board/write";
+	public String write(BoardDto boardDto, @RequestParam(defaultValue = "false") Boolean is_notice) {
+		  boardDto.setIs_notice(is_notice);
+		  boardService.insertPost(boardDto);
+		  return "board/write";
 		
 	} // write
 	

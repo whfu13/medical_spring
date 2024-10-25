@@ -1,6 +1,7 @@
 package com.java.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -31,5 +32,8 @@ public interface BoardDao {
 
 	// 게시글 수정
 	void updatePost(BoardDto bdto);
+
+	// 공지사항 가져오기
+	List<BoardDto> selectNoticeList();
 
 }

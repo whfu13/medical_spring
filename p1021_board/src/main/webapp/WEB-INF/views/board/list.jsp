@@ -181,93 +181,120 @@
 </head>
 <body>
 <section>
+    <section>
     <h1>질문 게시판</h1>
+
+    <!-- 검색 폼 -->
     <div id="wrapper">
-      <form action="/board/list" name="search" method="post" class="search-form">
-        <select name="category" id="category">
-          <option value="all">전체</option>
-          <option value="post_title">제목</option>
-          <option value="id">작성자</option>
-        </select>
-	
-          <input type="text" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
-  
-        <button type="button" onclick="sBtn()"><img src="/images/magnifying-glass-solid.svg"><i class="fas fa-search"></i></button>
-      </form>
+        <form action="/board/list" name="search" method="post" class="search-form">
+            <select name="category" id="category">
+                <option value="all">전체</option>
+                <option value="post_title">제목</option>
+                <option value="id">작성자</option>
+            </select>
+            <input type="text" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
+            <button type="button" onclick="sBtn()">
+                <img src="/images/magnifying-glass-solid.svg">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
     </div>
+
+    <!-- 공지사항 리스트 -->
+    <h2>공지사항</h2>
     <table>
-      <colgroup>
-        <col width="18%">
-        <col width="34%">
-        <col width="18%">
-        <col width="20%">
-        <col width="10%">
-      </colgroup>
-      <tr>
-      	<td colspan="5">전체 ${map.countAll}건</td>
-      </tr>
-      <!-- 제목부분 -->
-      <tr>
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>등록일</th>
-        <th>조회수</th>
-      </tr>
-      <!-- 게시판 내용부분 시작 -->
-      <c:forEach items="${map.list}" var="bdto">
-	<tr>
-		<td>
-		<c:if test="${bdto.post_indent == 0}"> <!-- 답변 부분 번호표시 x -->
-			<span class="table-notice">${bdto.post_no}</span>
-		</c:if>
-		</td>
-		<td class="table-title">
-		<c:choose>
-		<c:when test="${bdto.id == null || bdto.id == '탈퇴한 유저'}">
-		<span class="deleted-user-post">${bdto.post_title}</span>
-		</c:when>
-		<c:otherwise>
-		<a href="/board/view?post_no=${bdto.post_no}&page=${map.page}&category=${map.category}&searchWord=${map.searchWord}">
-		<c:forEach var="i" begin="1" end="${bdto.post_indent}" step="1">↪Re:</c:forEach>
-		${bdto.post_title}
-		</a>
-		</c:otherwise>
-		</c:choose>
-		</td>
-		<td>
-		<c:choose>
-		<c:when test="${bdto.id == null || bdto.id == '탈퇴한 유저'}">
-		<span class="deleted-user">탈퇴한 유저</span>
-		</c:when>
-		<c:otherwise>
-		${bdto.id}
-		</c:otherwise>
-		</c:choose>
-		</td>
-		<td>
-		<c:choose>
-		<c:when test="${bdto.id == null || bdto.id == '탈퇴한 유저'}">
-		<span class="deleted-user"><fmt:formatDate value="${bdto.post_reg_date}" pattern="YYYY-MM-dd"/></span>
-		</c:when>
-		<c:otherwise>
-		<fmt:formatDate value="${bdto.post_reg_date}" pattern="YYYY-MM-dd"/>
-		</c:otherwise>
-		</c:choose>
-		</td>
-		<td>
-		<c:choose>
-		<c:when test="${bdto.id == null || bdto.id == '탈퇴한 유저'}">
-		<span class="deleted-user">${bdto.post_hit}</span>
-		</c:when>
-		<c:otherwise>
-		${bdto.post_hit}
-		</c:otherwise>
-		</c:choose>
-		</td>
-	</tr>
-	</c:forEach>
-      
+        <colgroup>
+            <col width="10%">
+            <col width="50%">
+            <col width="20%">
+            <col width="20%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>등록일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="notice" items="${noticeList}">
+                <tr>
+                    <td>${notice.post_no}</td>
+                    <td>${notice.post_title}</td>
+                    <td>${notice.id}</td>
+                    <td><fmt:formatDate value="${notice.post_reg_date}" pattern="YYYY-MM-dd"/></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+
+    <!-- 일반 게시글 리스트 -->
+    <h2>일반 게시글</h2>
+    <table>
+        <colgroup>
+            <col width="10%">
+            <col width="50%">
+            <col width="20%">
+            <col width="10%">
+            <col width="10%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>등록일</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${map.list}" var="bdto">
+                <tr>
+                    <td>
+                        <!-- 공지사항 제외 -->
+                        <c:if test="${bdto.post_indent == 0}">
+                            <span class="table-notice">${bdto.post_no}</span>
+                        </c:if>
+                    </td>
+                    <td class="table-title">
+                        <c:choose>
+                            <c:when test="${bdto.id == null || bdto.id == '탈퇴한 유저'}">
+                                <span class="deleted-user-post">${bdto.post_title}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/board/view?post_no=${bdto.post_no}&page=${map.page}&category=${map.category}&searchWord=${map.searchWord}">
+                                    <!-- 답변 표시 -->
+                                    <c:forEach var="i" begin="1" end="${bdto.post_indent}" step="1">↪Re:</c:forEach>
+                                    ${bdto.post_title}
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${bdto.id == null || bdto.id == '탈퇴한 유저'}">
+                                <span class="deleted-user">탈퇴한 유저</span>
+                            </c:when>
+                            <c:otherwise>
+                                ${bdto.id}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <fmt:formatDate value="${bdto.post_reg_date}" pattern="YYYY-MM-dd"/>
+                    </td>
+                    <td>${bdto.post_hit}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+
+    <!-- 전체 게시글 수 표시 -->
+    <div>
+        전체 ${map.countAll}건
+    </div>
+
       <!-- 게시판 내용부분 끝 -->
       
     </table>

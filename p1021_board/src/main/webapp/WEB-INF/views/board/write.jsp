@@ -141,42 +141,49 @@
 <body>
 <section>
     <h1>게시판 글쓰기</h1>
-<div class="write-container">
-    <form action="/board/write" name="write" method="post" enctype="multipart/form-data">
-      <table>
-        <tr>
-          <th>작성자</th>
-          <td>
-            <input type="text" name="id" value="${sessionId}">
-          </td>
-        </tr>
-        <tr>
-          <th>제목</th>
-          <td>
-            <input type="text" name="post_title">
-          </td>
-        </tr>
-        <tr>
-          <th>내용</th>
-          <td>
-            <textarea name="post_content" cols="50" rows="10"></textarea>
-          </td>
-        </tr>
-        <tr>
-          <th>이미지 표시</th>
-          <td>
-            <input type="file" name="files" id="file">
-          </td>
-        </tr>
-      </table>
-      <hr>
-      <div class="button-wrapper">
-        <button type="submit" class="write">작성완료</button>
-        <button type="button" class="cancel" onclick="javascript:location.href='/board/list'">취소</button>
-      </div>
-    </form>
-</div>
-  </section>
+    <div class="write-container">
+        <form action="/board/write" name="write" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <th>작성자</th>
+                    <td>
+                        <input type="text" name="id" value="${sessionId}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>제목</th>
+                    <td>
+                        <input type="text" name="post_title">
+                    </td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <textarea name="post_content" cols="50" rows="10"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이미지 표시</th>
+                    <td>
+                        <input type="file" name="files" id="file">
+                    </td>
+                </tr>
+                <tr>
+                    <th>공지사항</th>
+                    <td>
+                        <input type="checkbox" name="is_notice" value="true">
+                        <label for="is_notice">이 글을 공지사항으로 설정</label>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <div class="button-wrapper">
+                <button type="submit" class="write">작성완료</button>
+                <button type="button" class="cancel" onclick="javascript:location.href='/board/list'">취소</button>
+            </div>
+        </form>
+    </div>
+</section>
 
 </body>
 </html>
