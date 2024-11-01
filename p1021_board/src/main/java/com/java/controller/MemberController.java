@@ -1,5 +1,7 @@
 package com.java.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,6 +39,7 @@ public class MemberController {
 	@Autowired HttpSession session;
 	private OAuthTokenDto oAuthTokenDto;
 
+	// 로그인 페이지로 이동
 	@RequestMapping("/member/signin")
 	public ModelAndView signin(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("member/signin");
@@ -246,5 +251,32 @@ public class MemberController {
 		new RestTemplate().exchange(url, HttpMethod.POST, request, String.class);
 	
 	} // logoutKakaoUser
+	
+	// 회원가입 페이지로 이동
+	@GetMapping("/member/signup1")
+	public String signup1() {
+		return "member/signup1";
+	}
+	
+	// 개인: 회원가입
+	@GetMapping("/member/signup2")
+	public String signup2() {
+		return "/member/signup2";
+	}
+	
+	// 회원가입
+	@PostMapping("/member/signup2")
+	@ResponseBody
+	public Map<String, String> signup(@RequestBody MemberDto memberDto){
+		Map<String, String> response = new HashMap<>();
+		try {
+			memberService.insertMember(memberDto);
+			response.put("status", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.put("status", "fail");
+		}
+		return response;
+	}
 
 }

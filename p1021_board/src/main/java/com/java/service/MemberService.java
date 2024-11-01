@@ -19,4 +19,7 @@ public interface MemberService {
 	// 자동 로그인 토큰 생성
 	String generateAutoLoginToken(MemberDto mDto);
 
+	// 회원정보 저장
+	void insertMember(MemberDto memberDto);
+
 }

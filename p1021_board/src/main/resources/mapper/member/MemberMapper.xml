@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.MemberDao">
+	<!-- 회원 전체 목록 가져오기 -->
+	<select id="selectAll" resultType="com.java.dto.MemberDto">
+		select * from users
+	</select>
+	<!-- 회원정보 조회 -->
+	<select id="selectOne" resultType="com.java.dto.MemberDto">
+		select * from users where id=#{id}
+	</select>
+	<!-- 로그인 -->
+	<select id="selectSignIn" resultType="com.java.dto.MemberDto">
+		select * from users where id=#{id} and pw=#{pw}
+	</select>
+	<!-- 자동 로그인 토큰으로 사용자 찾기 -->
+	<select id="findByAutoLoginToken" parameterType="String"
+		 resultType="com.java.dto.MemberDto">
+		select * from users where auto_login_token=#{autoLoginToken}
+	</select>
+	<!-- 자동 로그인 토큰 업데이트 -->
+	<update id="updateAutoLoginToken" parameterType="com.java.dto.MemberDto">
+		update users set auto_login_token=#{autoLoginToken} where id=#{id}
+	</update>
+	<!-- 아이디로 사용자 정보 찾기 -->
+	<select id="findByUsername" parameterType="String"
+		 resultType="com.java.dto.MemberDto">
+		select * from users where id=#{id}
+	</select>
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword" parameterType="com.java.dto.MemberDto">
+		update users set pw=#{pw} where id=#{id}
+	</update>
+	<!-- 임시 비밀번호 저장 -->
+	<update id="saveTempPassword" parameterType="com.java.dto.MemberDto">
+		update users set temp_pw=#{pw} where id=#{id}
+	</update>
+	<!-- 임시 비밀번호 가져오기 -->
+	<select id="getTempPassword" parameterType="String"
+		 resultType="String">
+		select temp_pw from users where id=#{id}
+	</select>
+	<!-- 회원정보 저장 -->
+	<insert id="insertMember">
+		insert into users (id, pw, email, name, address,
+		phone, gender, birth_date, join_date, disease, feature)
+		values (#{id}, #{pw}, #{email}, #{name}, #{address}, #{phone}, 
+		#{gender}, #{birth_date}, sysdate, #{disease}, #{feature})
+	</insert>
+</mapper>

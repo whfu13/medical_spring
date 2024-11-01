@@ -40,4 +40,9 @@ public class MemberServiceImpl implements MemberService {
         return autoLoginToken;
 	}
 
+	@Override
+	public void insertMember(MemberDto memberDto) {
+		memberDao.insertMember(memberDto);
+	}
+
 }

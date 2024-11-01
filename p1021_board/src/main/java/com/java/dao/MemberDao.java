@@ -22,4 +22,7 @@ public interface MemberDao {
 	// 자동 로그인 토큰 업데이트
 	void updateAutoLoginToken(String id, String autoLoginToken);
 
+	// 회원정보 저장
+	void insertMember(MemberDto memberDto);
+
 }
