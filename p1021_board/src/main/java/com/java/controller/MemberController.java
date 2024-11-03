@@ -257,7 +257,7 @@ public class MemberController {
 	} // logoutKakaoUser
 	
 	// 회원가입 페이지로 이동
-	@GetMapping("/member/c")
+	@GetMapping("/member/signup1")
 	public String signup1() {
 		return "member/signup1";
 	
@@ -303,18 +303,19 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		String id = (String) session.getAttribute("sessionId");
 		MemberDto memberDto = memberService.selectOne(id);
-		
 		// 중복 제거를 위해 HashSet 사용
         List<String> selectedDiseases = memberDto.getDisease() != null ? 
                                         new ArrayList<>(new HashSet<>(Arrays.asList(memberDto.getDisease().split(",")))) : new ArrayList<>();
         List<String> selectedFeatures = memberDto.getFeature() != null ? 
                                         new ArrayList<>(new HashSet<>(Arrays.asList(memberDto.getFeature().split(",")))) : new ArrayList<>();
-		
-        mv.addObject("memberDto",memberDto);
-        mv.addObject("selectedDiseases",selectedDiseases);
-        mv.addObject("selectedFeatures",selectedFeatures);
-        mv.setViewName("myinfo/myinfo");)
-		return mv;
-	}
+		mv.addObject("memberDto",memberDto);
+		mv.addObject("selectedDiseases",selectedDiseases);
+		mv.addObject("selectedFeatures",selectedFeatures);
+		mv.setViewName("myinfo/myinfo");
+        
+        return mv;
+        
+	} // myinfo
+	
 
 }

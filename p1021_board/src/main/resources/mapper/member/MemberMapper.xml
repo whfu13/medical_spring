@@ -49,4 +49,9 @@
 		values (#{id}, #{pw}, #{email}, #{name}, #{address}, #{phone}, 
 		#{gender}, #{birth_date}, sysdate, #{disease}, #{feature})
 	</insert>
+	<!-- 아이디 중복체크 -->
+	<select id="checkDuplicateId" parameterType="String"
+		resultType="int">
+		select count(*) from users where id=#{id}
+	</select>
 </mapper>
