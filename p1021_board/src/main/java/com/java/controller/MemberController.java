@@ -1,6 +1,10 @@
 package com.java.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -253,16 +257,18 @@ public class MemberController {
 	} // logoutKakaoUser
 	
 	// 회원가입 페이지로 이동
-	@GetMapping("/member/signup1")
+	@GetMapping("/member/c")
 	public String signup1() {
 		return "member/signup1";
-	}
+	
+	} // signup1
 	
 	// 개인: 회원가입
 	@GetMapping("/member/signup2")
 	public String signup2() {
 		return "/member/signup2";
-	}
+		
+	} // signup2
 	
 	// 회원가입
 	@PostMapping("/member/signup2")
@@ -277,6 +283,38 @@ public class MemberController {
 			response.put("status", "fail");
 		}
 		return response;
+		
+	} // signup
+	
+	// 아이디 중복체크
+	@ResponseBody
+	@GetMapping("/member/checkId")
+	public Map<String,Boolean> checkId(@RequestParam("id") String id){
+		boolean isDuplicated = memberService.isDuplicated(id);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("isDuplicated", isDuplicated);
+		return response;
+		
+	}	// checkId
+	
+	// 회원정보 페이지
+	@RequestMapping("/myinfo/myinfo")
+	public ModelAndView myinfo() {
+		ModelAndView mv = new ModelAndView();
+		String id = (String) session.getAttribute("sessionId");
+		MemberDto memberDto = memberService.selectOne(id);
+		
+		// 중복 제거를 위해 HashSet 사용
+        List<String> selectedDiseases = memberDto.getDisease() != null ? 
+                                        new ArrayList<>(new HashSet<>(Arrays.asList(memberDto.getDisease().split(",")))) : new ArrayList<>();
+        List<String> selectedFeatures = memberDto.getFeature() != null ? 
+                                        new ArrayList<>(new HashSet<>(Arrays.asList(memberDto.getFeature().split(",")))) : new ArrayList<>();
+		
+        mv.addObject("memberDto",memberDto);
+        mv.addObject("selectedDiseases",selectedDiseases);
+        mv.addObject("selectedFeatures",selectedFeatures);
+        mv.setViewName("myinfo/myinfo");)
+		return mv;
 	}
 
 }

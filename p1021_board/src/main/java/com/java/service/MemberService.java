@@ -22,4 +22,10 @@ public interface MemberService {
 	// 회원정보 저장
 	void insertMember(MemberDto memberDto);
 
+	// 아이디 중복체크
+	boolean isDuplicated(String id);
+
+	// 회원정보 가져오기
+	MemberDto selectOne(String id);
+
 }

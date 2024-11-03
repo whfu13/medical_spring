@@ -40,9 +40,19 @@ public class MemberServiceImpl implements MemberService {
         return autoLoginToken;
 	}
 
-	@Override
+	@Override	// 회원정보 저장
 	public void insertMember(MemberDto memberDto) {
 		memberDao.insertMember(memberDto);
+	}
+
+	@Override	// 아이디 중복체크
+	public boolean isDuplicated(String id) {
+		return memberDao.checkDuplicateId(id) > 0;
+	}
+
+	@Override	// 회원정보 가져오기
+	public MemberDto selectOne(String id) {
+		return memberDao.selectOne(id);
 	}
 
 }

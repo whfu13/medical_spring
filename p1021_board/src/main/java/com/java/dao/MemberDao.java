@@ -25,4 +25,10 @@ public interface MemberDao {
 	// 회원정보 저장
 	void insertMember(MemberDto memberDto);
 
+	// 아이디 중복체크
+	int checkDuplicateId(String id);
+
+	// 회원정보 조회
+	MemberDto selectOne(String id);
+
 }
