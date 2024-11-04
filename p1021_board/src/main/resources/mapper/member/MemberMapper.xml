@@ -54,4 +54,25 @@
 		resultType="int">
 		select count(*) from users where id=#{id}
 	</select>
+	<!-- 회원정보 업데이트 -->
+	<update id="updateMember">
+		update users set email=#{email}, name=#{name},address=#{address},
+	  	gender=#{gender}, disease=#{disease}, feature=#{feature}
+      	where id=#{id}
+	</update>
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember">
+		delete from users where id=#{id}		
+	</delete>
+	<!-- 전체 질환 목록 가져오기 -->
+	<select id="selectAllDiseases" resultType="java.lang.String">
+		select distinct
+		disease from users where disease is not null
+	</select>
+
+	<!-- 전체 특성 목록 가져오기 -->
+	<select id="selectAllFeatures" resultType="java.lang.String">
+		select distinct
+		feature from users where feature is not null
+	</select>
 </mapper>

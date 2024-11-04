@@ -55,4 +55,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectOne(id);
 	}
 
+	@Override	// 회원정보 수정
+	public void updateMember(MemberDto memberDto) {
+		memberDao.updateMember(memberDto);
+	}
+
+	@Override	// 회원탈퇴
+	public void deleteMember(String id) {
+		memberDao.deleteMember(id);
+	}
+
 }

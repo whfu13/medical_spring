@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -317,5 +318,44 @@ public class MemberController {
         
 	} // myinfo
 	
+	// 회원정보 수정 페이지
+	@RequestMapping("/myinfo/myinfo2")
+	public ModelAndView myinfo2() {
+		ModelAndView mv = new ModelAndView();
+		String id = (String) session.getAttribute("sessionId");
+		MemberDto memberDto = memberService.selectOne(id);
+		// 중복 제거를 위해 HashSet 사용
+        List<String> selectedDiseases = memberDto.getDisease() != null ? 
+                                        new ArrayList<>(new HashSet<>(Arrays.asList(memberDto.getDisease().split(",")))) : new ArrayList<>();
+        List<String> selectedFeatures = memberDto.getFeature() != null ? 
+                                        new ArrayList<>(new HashSet<>(Arrays.asList(memberDto.getFeature().split(",")))) : new ArrayList<>();
+        mv.addObject("memberDto",memberDto);
+		mv.addObject("selectedDiseases",selectedDiseases);
+		mv.addObject("selectedFeatures",selectedFeatures);
+		mv.setViewName("myinfo/myinfo2");
+		
+		return mv;
+		
+	} // myinfo2
 
+	// 회원정보 수정
+	@PostMapping("/myinfo/update")
+	public String updateMember(@ModelAttribute MemberDto memberDto) {
+		memberService.updateMember(memberDto);
+		return "redirect:/myinfo/myifno";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping("/member/delete")
+	public String delete(HttpSession session, HttpServletResponse response) {
+		String id = (String) session.getAttribute("sessionId");
+		memberService.deleteMember(id);
+		// 로그아웃 처리
+		session.invalidate();
+		Cookie autoLoginCookie = new Cookie("autoLoginToken", null);
+		autoLoginCookie.setMaxAge(0);
+		autoLoginCookie.setPath("/");
+		response.addCookie(autoLoginCookie);
+		return "redirect:/index";
+	}
 }

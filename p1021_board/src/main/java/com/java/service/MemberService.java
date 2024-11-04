@@ -28,4 +28,10 @@ public interface MemberService {
 	// 회원정보 가져오기
 	MemberDto selectOne(String id);
 
+	// 회원정보 수정
+	void updateMember(MemberDto memberDto);
+
+	// 회원탈퇴
+	void deleteMember(String id);
+
 }
