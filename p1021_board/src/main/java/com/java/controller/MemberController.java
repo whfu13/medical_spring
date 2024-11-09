@@ -343,7 +343,8 @@ public class MemberController {
 	public String updateMember(@ModelAttribute MemberDto memberDto) {
 		memberService.updateMember(memberDto);
 		return "redirect:/myinfo/myifno";
-	}
+	
+	} // updateMember
 	
 	// 회원탈퇴
 	@RequestMapping("/member/delete")
@@ -357,5 +358,72 @@ public class MemberController {
 		autoLoginCookie.setPath("/");
 		response.addCookie(autoLoginCookie);
 		return "redirect:/index";
-	}
+	
+	} // delete
+	
+	// 비밀번호 체크
+	@RequestMapping("/myinfo/passwordCheck")
+	public String passwordCheck() {
+		return "myinfo/passwordCheck";
+	
+	} // passwordCheck
+	
+	// 비밀번호 확인 처리
+	@PostMapping("/myinfo/passwordCheck")
+	public ModelAndView passwordCheck(@RequestParam("password") String password) {
+		String id = (String) session.getAttribute("sessionId");
+		MemberDto memberDto = memberService.findByUsername(id);
+		ModelAndView mv = new ModelAndView();
+		
+		if(memberDto != null && memberDto.getPw().equals(password)) {
+			mv.setViewName("redirect:/myinfo/myinfo3");
+		}else {
+			mv.addObject("errorMessage","비밀번호가 일치하지 않습니다.");
+			mv.setViewName("myinfo/passwordCheck");
+		}
+		
+		return mv;
+			
+	} // passwordCheck
+	
+	// 비밀번호 변경 페이지로 이동
+	@RequestMapping("/myinfo/myinfo3")
+	public String changePasswordForm() {
+		return "myinfo/myinfo3";
+	
+	} // changePasswordForm
+	
+	// 비밀번호 변경
+	@PostMapping("/myinfo/updatePassword")
+	public ModelAndView updatePassword(@RequestParam("newPassword") String newPassword,
+			@RequestParam("confirmPassword") String confirmPassword, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView();
+		String id = (String) session.getAttribute("sessionId");
+		
+		if(newPassword.equals(confirmPassword)) {
+			MemberDto memberDto = memberService.findByUsername(id);
+			if(memberDto != null) {
+				memberDto.setPw(newPassword);
+				memberService.updatePassword(memberDto);
+				
+				// 로그아웃 처리
+				session.invalidate();
+				Cookie autoLoginCookie = new Cookie("autoLoginToken",null);
+				autoLoginCookie.setMaxAge(0);
+				autoLoginCookie.setPath("/");
+				response.addCookie(autoLoginCookie);
+				
+				mv.setViewName("redirect:/index");
+			}else {
+				mv.addObject("errorMessage","사용자 정보를 찾을 수 없습니다.");
+				mv.setViewName("myinfo/myinfo3");
+			}
+		}else {
+			mv.addObject("errorMessage","비밀번호가 일치하지 않습니다.");
+			mv.setViewName("myinfo/myinfo3");
+		}
+		
+		return mv;
+		
+	} // updatePassword
 }
