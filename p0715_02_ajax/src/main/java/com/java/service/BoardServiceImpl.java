@@ -14,7 +14,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
 
-	@Override
+	@Override	// 게시글 리스트 불러오기
 	public ArrayList<BoardDto> selectAll(String category, String sword) {
 		
 		ArrayList<BoardDto> list = boardDao.selectAll(category, sword);
