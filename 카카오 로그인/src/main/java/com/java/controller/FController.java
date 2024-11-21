@@ -32,7 +32,6 @@ public class FController {
 	@Value("${kakao.admin_id}")
 	private String id;
 	
-
 	// 토큰키 객체
 	OAuthTokenDto oAuthTokenDto = null;
 	
@@ -47,7 +46,6 @@ public class FController {
 		
 		// 로컬 서버에서만 섹션 종료
 		session.invalidate();
-		
 		
 		// 1. 카카오 섹션 종료 - 로그아웃
 		// 사용자 정보 가져오기
@@ -108,7 +106,6 @@ public class FController {
 		map.add("redirect_uri", redirect_uri);
 		map.add("code", code);
 		
-		
 		// HttpEntity - HttpHeaders, HttpBody 1개의 오브젝트 생성
 		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = 
 				new HttpEntity<>(map,headers);
@@ -121,6 +118,7 @@ public class FController {
 		
 		// json 파일을 java파일로 변경
 		ObjectMapper objectMapper = new ObjectMapper();
+		
 		// 상단에 선언
 		// oAuthTokenDto = null;
 		
@@ -130,19 +128,16 @@ public class FController {
 		
 		System.out.println("3. kakaoToken : "+oAuthTokenDto.getAccess_token());
 		
-		
 		// 사용자 정보 가져오기
 		String oauthUserUrl = "https://kapi.kakao.com/v2/user/me";
 		String authorization = "Bearer "+oAuthTokenDto.getAccess_token();
 		content_type = "application/x-www-form-urlencoded;charset=utf-8";
-		
 		
 		// header오브젝트 생성
 		HttpHeaders headers_user = new HttpHeaders();
 		headers_user.add("Content-type", content_type);
 		headers_user.add("Authorization", authorization);
 		
-	
 		// HttpEntity - HttpHeaders, HttpBody 1개의 오브젝트 생성
 		HttpEntity<MultiValueMap<String, String>> kakaoTokenUserRequest =
 				new HttpEntity<>(headers_user);
@@ -163,11 +158,9 @@ public class FController {
 		System.out.println("4.kakaoUserToken class id : "+kakaoDto.getId());
 		System.out.println("5.kakaoUserToken class Nickname : "+kakaoDto.getProperties().getNickname());
 
-		
 		// 로그인의 섹션 생성 후 로그인 완료
 		session.setAttribute("session_id",kakaoDto.getId());
 		session.setAttribute("session_Nickname",kakaoDto.getProperties().getNickname());
-		
 		
 //		return "kakaoToken class id : "+kakaoDto.getId();
 		return "redirect:/";
